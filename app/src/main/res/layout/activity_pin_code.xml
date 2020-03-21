@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="8dp"
-    tools:context=".MainActivity">
+    tools:context=".PinCodeActivity">
 
     <TextView
         android:id="@+id/txtEnterPin"
@@ -24,7 +24,7 @@
         android:layout_height="@dimen/placeholder_view_size"
         android:layout_marginStart="32dp"
         android:layout_marginTop="32dp"
-        android:background="@drawable/circle"
+        android:background="@drawable/circle_empty"
         app:layout_constraintEnd_toStartOf="@+id/placeholder2"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
@@ -34,7 +34,7 @@
         android:id="@+id/placeholder2"
         android:layout_width="@dimen/placeholder_view_size"
         android:layout_height="@dimen/placeholder_view_size"
-        android:background="@drawable/circle"
+        android:background="@drawable/circle_empty"
         app:layout_constraintEnd_toStartOf="@+id/placeholder3"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/placeholder1"
@@ -44,7 +44,7 @@
         android:id="@+id/placeholder3"
         android:layout_width="@dimen/placeholder_view_size"
         android:layout_height="@dimen/placeholder_view_size"
-        android:background="@drawable/circle"
+        android:background="@drawable/circle_empty"
         app:layout_constraintEnd_toStartOf="@+id/placeholder4"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/placeholder2"
@@ -55,13 +55,14 @@
         android:layout_width="@dimen/placeholder_view_size"
         android:layout_height="@dimen/placeholder_view_size"
         android:layout_marginEnd="32dp"
-        android:background="@drawable/circle"
+        android:background="@drawable/circle_empty"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/placeholder3"
         app:layout_constraintTop_toTopOf="@+id/placeholder3" />
 
     <androidx.gridlayout.widget.GridLayout
+        android:id="@+id/gridLayout2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
@@ -70,35 +71,57 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/placeholder1"
-        app:orientation="horizontal">
+        app:orientation="horizontal"
+        >
 
-        <Button android:text="@string/btn_1" />
+        <Button android:text="@string/btn_1"
+            android:onClick="onClickNumber"/>
 
-        <Button android:text="@string/btn_2" />
+        <Button android:text="@string/btn_2"
+            android:onClick="onClickNumber"/>
 
-        <Button android:text="@string/btn_3" />
+        <Button android:text="@string/btn_3"
+            android:onClick="onClickNumber"/>
 
-        <Button android:text="@string/btn_4" />
+        <Button android:text="@string/btn_4"
+            android:onClick="onClickNumber"/>
 
-        <Button android:text="@string/btn_5" />
+        <Button android:text="@string/btn_5"
+            android:onClick="onClickNumber"/>
 
-        <Button android:text="@string/btn_6" />
+        <Button android:text="@string/btn_6"
+            android:onClick="onClickNumber"/>
 
-        <Button android:text="@string/btn_7" />
+        <Button android:text="@string/btn_7"
+            android:onClick="onClickNumber"/>
 
-        <Button android:text="@string/btn_8" />
+        <Button android:text="@string/btn_8"
+            android:onClick="onClickNumber"/>
 
-        <Button android:text="@string/btn_9" />
+        <Button android:text="@string/btn_9"
+            android:onClick="onClickNumber"/>
 
         <Button
             android:text="@string/btn_0"
             app:layout_columnSpan="2"
-            app:layout_gravity="end" />
+            app:layout_gravity="end"
+            android:onClick="onClickNumber"/>
 
         <Button
             android:id="@+id/btnBackspace"
-            android:text="@string/btn_backspace" />
+            android:text="@string/btn_backspace"
+            android:onClick="onClickBackspace"/>
 
     </androidx.gridlayout.widget.GridLayout>
+
+    <TextView
+        android:id="@+id/errorOutput"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/gridLayout2"
+        tools:text="Вывод ошибки ввода ПИН-кода" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

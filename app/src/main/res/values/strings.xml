@@ -12,4 +12,5 @@
     <string name="btn_9">9</string>
     <string name="btn_0">0</string>
     <string name="btn_backspace">←</string>
+    <string name="invalid_pin_code">Не верный ПИН-код! Попробуйте ещё раз!</string>
 </resources>
