@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="8dp"
+    tools:context=".PinCodeActivity">
+
+    <TextView
+        android:id="@+id/txtEnterPin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/enter_pin"
+        android:textAlignment="center"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <View
+        android:id="@+id/placeholder1"
+        android:layout_width="@dimen/placeholder_view_size"
+        android:layout_height="@dimen/placeholder_view_size"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="32dp"
+        android:background="@drawable/circle_empty"
+        app:layout_constraintEnd_toStartOf="@+id/placeholder2"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtEnterPin" />
+
+    <View
+        android:id="@+id/placeholder2"
+        android:layout_width="@dimen/placeholder_view_size"
+        android:layout_height="@dimen/placeholder_view_size"
+        android:background="@drawable/circle_empty"
+        app:layout_constraintEnd_toStartOf="@+id/placeholder3"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/placeholder1"
+        app:layout_constraintTop_toTopOf="@+id/placeholder1" />
+
+    <View
+        android:id="@+id/placeholder3"
+        android:layout_width="@dimen/placeholder_view_size"
+        android:layout_height="@dimen/placeholder_view_size"
+        android:background="@drawable/circle_empty"
+        app:layout_constraintEnd_toStartOf="@+id/placeholder4"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/placeholder2"
+        app:layout_constraintTop_toTopOf="@+id/placeholder2" />
+
+    <View
+        android:id="@+id/placeholder4"
+        android:layout_width="@dimen/placeholder_view_size"
+        android:layout_height="@dimen/placeholder_view_size"
+        android:layout_marginEnd="32dp"
+        android:background="@drawable/circle_empty"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/placeholder3"
+        app:layout_constraintTop_toTopOf="@+id/placeholder3" />
+
+    <androidx.gridlayout.widget.GridLayout
+        android:id="@+id/gridLayout2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        app:alignmentMode="alignBounds"
+        app:columnCount="3"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/placeholder1"
+        app:orientation="horizontal"
+        >
+
+        <Button android:text="@string/btn_1"
+            android:onClick="onClickNumber"/>
+
+        <Button android:text="@string/btn_2"
+            android:onClick="onClickNumber"/>
+
+        <Button android:text="@string/btn_3"
+            android:onClick="onClickNumber"/>
+
+        <Button android:text="@string/btn_4"
+            android:onClick="onClickNumber"/>
+
+        <Button android:text="@string/btn_5"
+            android:onClick="onClickNumber"/>
+
+        <Button android:text="@string/btn_6"
+            android:onClick="onClickNumber"/>
+
+        <Button android:text="@string/btn_7"
+            android:onClick="onClickNumber"/>
+
+        <Button android:text="@string/btn_8"
+            android:onClick="onClickNumber"/>
+
+        <Button android:text="@string/btn_9"
+            android:onClick="onClickNumber"/>
+
+        <Button
+            android:text="@string/btn_0"
+            app:layout_columnSpan="2"
+            app:layout_gravity="end"
+            android:onClick="onClickNumber"/>
+
+        <Button
+            android:id="@+id/btnBackspace"
+            android:text="@string/btn_backspace"
+            android:onClick="onClickBackspace"/>
+
+    </androidx.gridlayout.widget.GridLayout>
+
+    <TextView
+        android:id="@+id/errorOutput"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/gridLayout2"
+        tools:text="Вывод ошибки ввода ПИН-кода" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
