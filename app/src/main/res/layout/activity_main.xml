@@ -4,15 +4,101 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:padding="8dp"
     tools:context=".MainActivity">
 
     <TextView
+        android:id="@+id/txtEnterPin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/enter_pin"
+        android:textAlignment="center"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <View
+        android:id="@+id/placeholder1"
+        android:layout_width="@dimen/placeholder_view_size"
+        android:layout_height="@dimen/placeholder_view_size"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="32dp"
+        android:background="@drawable/circle"
+        app:layout_constraintEnd_toStartOf="@+id/placeholder2"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtEnterPin" />
+
+    <View
+        android:id="@+id/placeholder2"
+        android:layout_width="@dimen/placeholder_view_size"
+        android:layout_height="@dimen/placeholder_view_size"
+        android:background="@drawable/circle"
+        app:layout_constraintEnd_toStartOf="@+id/placeholder3"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/placeholder1"
+        app:layout_constraintTop_toTopOf="@+id/placeholder1" />
+
+    <View
+        android:id="@+id/placeholder3"
+        android:layout_width="@dimen/placeholder_view_size"
+        android:layout_height="@dimen/placeholder_view_size"
+        android:background="@drawable/circle"
+        app:layout_constraintEnd_toStartOf="@+id/placeholder4"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/placeholder2"
+        app:layout_constraintTop_toTopOf="@+id/placeholder2" />
+
+    <View
+        android:id="@+id/placeholder4"
+        android:layout_width="@dimen/placeholder_view_size"
+        android:layout_height="@dimen/placeholder_view_size"
+        android:layout_marginEnd="32dp"
+        android:background="@drawable/circle"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/placeholder3"
+        app:layout_constraintTop_toTopOf="@+id/placeholder3" />
+
+    <androidx.gridlayout.widget.GridLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hello World!"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_marginTop="32dp"
+        app:alignmentMode="alignBounds"
+        app:columnCount="3"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/placeholder1"
+        app:orientation="horizontal">
+
+        <Button android:text="@string/btn_1" />
+
+        <Button android:text="@string/btn_2" />
+
+        <Button android:text="@string/btn_3" />
+
+        <Button android:text="@string/btn_4" />
+
+        <Button android:text="@string/btn_5" />
+
+        <Button android:text="@string/btn_6" />
+
+        <Button android:text="@string/btn_7" />
+
+        <Button android:text="@string/btn_8" />
+
+        <Button android:text="@string/btn_9" />
+
+        <Button
+            android:text="@string/btn_0"
+            app:layout_columnSpan="2"
+            app:layout_gravity="end" />
+
+        <Button
+            android:id="@+id/btnBackspace"
+            android:text="@string/btn_backspace" />
+
+    </androidx.gridlayout.widget.GridLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
