@@ -1,17 +1,19 @@
 package com.example.easynotes;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.ArrayList;
 
 public class PinCodeActivity extends AppCompatActivity {
-    private String curPinCode = "";
+    private static final String LOG_TAG = "PinCodeActivityTag";
+
+    private String curPin = "";
     private ArrayList<View> placeholders;
     private TextView errorOutput;
 
@@ -38,22 +40,26 @@ public class PinCodeActivity extends AppCompatActivity {
             errorOutput.setText("");
         }
 
+        if (curPin.length() == 4) return;
+
         Button curBtn = (Button) view;
         String curNumber = curBtn.getText().toString();
-        curPinCode += curNumber;
+        curPin += curNumber;
 
-        placeholders.get(curPinCode.length() - 1).setBackground(getDrawable(R.drawable.circle_filled));
+        placeholders.get(curPin.length() - 1).setBackground(getDrawable(R.drawable.circle_filled));
 
-        if (curPinCode.length() == 4) {
-            showToast("Делаем проверку ПИН-кода: " + curPinCode);
-            //Keystore keystore = App.getKeystore();
-            //if (keystore.checkPinCode(curPinCode)) {
-            if (false) {
+        if (curPin.length() == 4) {
+            Log.d(LOG_TAG, "Делаем проверку ПИН-кода: " + curPin);
+            Keystore keystore = App.getKeystore();
+            keystore.saveNewPin("0000"); //Для тестирования
+
+            if (keystore.checkPin(curPin)) {
                 //startActivity
+                Log.d(LOG_TAG, "Переходим на главный экран с заметками");
             } else {
                 errorOutput = findViewById(R.id.errorOutput);
                 errorOutput.setText(R.string.invalid_pin_code);
-                curPinCode = "";
+                curPin = "";
                 for (int i = 0; i < placeholders.size(); i++) {
                     placeholders.get(i).setBackground(getDrawable(R.drawable.circle_empty));
                 }
@@ -63,18 +69,15 @@ public class PinCodeActivity extends AppCompatActivity {
     }
 
     public void onClickBackspace(View view) {
-        if (curPinCode.length() == 0) return;
+        if (curPin.length() == 0) return;
 
-        placeholders.get(curPinCode.length() - 1).setBackground(getDrawable(R.drawable.circle_empty));
+        placeholders.get(curPin.length() - 1).setBackground(getDrawable(R.drawable.circle_empty));
 
         StringBuilder tmp = new StringBuilder();
-        for (int i = 0; i < curPinCode.length() - 1; i++) {
-            tmp.append(curPinCode.charAt(i));
+        for (int i = 0; i < curPin.length() - 1; i++) {
+            tmp.append(curPin.charAt(i));
         }
-        curPinCode = tmp.toString();
+        curPin = tmp.toString();
     }
 
-    private void showToast(String message) {
-        Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
-    }
 }
