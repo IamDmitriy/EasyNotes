@@ -18,7 +18,7 @@ import java.util.Date;
 import java.util.List;
 
 public class NotesListAdapter extends BaseAdapter {
-    private static final String DATE_FORMAT = "dd/MM/yyyy HH:mm";
+    private static final String DATE_FORMAT = "dd.MM.yyyy HH:mm";
 
     private List<Note> notes;
 
@@ -68,41 +68,54 @@ public class NotesListAdapter extends BaseAdapter {
 
         Note note = notes.get(position);
 
-        TextView title = view.findViewById(R.id.title);
-        TextView body = view.findViewById(R.id.body);
-        TextView deadline = view.findViewById(R.id.deadline);
+        TextView txtTitle = view.findViewById(R.id.title);
+        TextView txtBody = view.findViewById(R.id.body);
+        TextView txtDeadline = view.findViewById(R.id.deadline);
 
-        if (note.getTitle() != null) {
-            title.setText(note.getTitle());
+        String title = note.getTitle();
+        String body = note.getBody();
+        boolean hasDeadline = note.hasDeadline();
+
+        if (title != null && !title.isEmpty()) {
+            txtTitle.setText(title);
+            txtTitle.setVisibility(View.VISIBLE);
         } else {
-            title.setVisibility(View.GONE);
+            txtTitle.setVisibility(View.GONE);
         }
 
-        if (note.getBody() != null) {
-            body.setText(note.getBody());
+        if (body != null && !body.isEmpty()) {
+            txtBody.setText(body);
+            txtBody.setVisibility(View.VISIBLE);
         } else {
-            body.setVisibility(View.GONE);
+            txtBody.setVisibility(View.GONE);
         }
 
-        if (note.hasDeadline()) {
+        if (hasDeadline) {
             Date deadlineDate = new Date(note.getDeadline());
 
             if (deadlineDate.compareTo(new Date()) < 0) {
-                CardView cardView = view.findViewById(R.id.cardView);
-                cardView.setCardBackgroundColor(context.getResources().
-                        getColor(R.color.colorOverdueDeadline));
+                setCardBackgroundColor(R.color.colorOverdueDeadline, view);
 
+            } else {
+                setCardBackgroundColor(R.color.colorNormalCardBackground, view);
             }
 
             DateFormat dateFormat = new SimpleDateFormat(DATE_FORMAT);
             String deadlineOutput = dateFormat.format(deadlineDate);
-            deadline.setText(deadlineOutput);
+            txtDeadline.setText(deadlineOutput);
 
-
+            txtDeadline.setVisibility(View.VISIBLE);
         } else {
-            deadline.setVisibility(View.GONE);
+            txtDeadline.setVisibility(View.GONE);
+            setCardBackgroundColor(R.color.colorNormalCardBackground, view);
         }
 
         return view;
+    }
+
+    private void setCardBackgroundColor(int colorCardBackground, View curItemView) {
+        CardView cardView = curItemView.findViewById(R.id.cardView);
+        cardView.setCardBackgroundColor(context.getResources().
+                getColor(colorCardBackground));
     }
 }

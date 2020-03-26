@@ -8,4 +8,7 @@
     <color name="placeholderBackgroundFilled">#FFBF00</color>
     
     <color name="colorOverdueDeadline">#C51162</color>
+    <color name="colorNormalCardBackground">#FFFFFFFF</color>
+
+
 </resources>

@@ -1,17 +1,30 @@
 <resources>
-    <string name="app_name">Easy Notes</string>
-    <string name="enter_pin">Введите ПИН-код:</string>
-    <string name="btn_1">1</string>
-    <string name="btn_2">2</string>
-    <string name="btn_3">3</string>
-    <string name="btn_4">4</string>
-    <string name="btn_5">5</string>
-    <string name="btn_6">6</string>
-    <string name="btn_7">7</string>
-    <string name="btn_8">8</string>
-    <string name="btn_9">9</string>
-    <string name="btn_0">0</string>
-    <string name="btn_backspace">←</string>
-    <string name="invalid_pin_code">Не верный ПИН-код! Попробуйте ещё раз!</string>
-    <string name="settings">Настройки</string>
+    <string name="app_name" translatable="false">Easy Notes</string>
+    <string name="enter_pin" translatable="false">Введите ПИН-код:</string>
+    <string name="btn_1" translatable="false">1</string>
+    <string name="btn_2" translatable="false">2</string>
+    <string name="btn_3" translatable="false">3</string>
+    <string name="btn_4" translatable="false">4</string>
+    <string name="btn_5" translatable="false">5</string>
+    <string name="btn_6" translatable="false">6</string>
+    <string name="btn_7" translatable="false">7</string>
+    <string name="btn_8" translatable="false">8</string>
+    <string name="btn_9" translatable="false">9</string>
+    <string name="btn_0" translatable="false">0</string>
+    <string name="btn_backspace" translatable="false">←</string>
+    <string name="invalid_pin_code" translatable="false">Не верный ПИН-код! Попробуйте ещё раз!</string>
+    <string name="settings" translatable="false">Настройки</string>
+    <string name="title">Заголовок</string>
+    <string name="note_body">Текст заметки</string>
+    <string name="deadline">Дедлайн</string>
+    <string name="new_note">Новая заметка</string>
+    <string name="save_note">Сохранить заметку</string>
+    <string name="my_notes">Мои заметки</string>
+    <string name="note_saved_successfully">Заметка успешно сохранена!</string>
+    <string name="delete">Удалить</string>
+    <string name="note_deleted_successfully">Заметка успешно удалена!</string>
+    <string name="cancel">Отмена</string>
+    <string name="confirmation_deletion">Вы уверены, что хотите удалить заметку?</string>
+    <string name="attention">Внимание!</string>
+
 </resources>

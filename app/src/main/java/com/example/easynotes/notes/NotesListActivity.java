@@ -1,5 +1,7 @@
 package com.example.easynotes.notes;
 
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -7,25 +9,56 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.example.easynotes.R;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 public class NotesListActivity extends AppCompatActivity {
     private static final String LOG_TAG = "ListNotesActivityTag";
+    private static final int REQUEST_CODE_NOTE = 1;
+    private static final String KEY_IS_NOTE_SAVE = "isNoteSaved";
+    private static final String KEY_NOTE_ID = "noteId";
+
     private NotesListAdapter notesListAdapter;
+    private SwipeRefreshLayout swipeLayout;
+    private int positionFoDelete;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_notes_list);
 
-        main();
+        init();
     }
 
-    private void main() {
+    private void init() {
+        FloatingActionButton fab = findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(NotesListActivity.this, NoteActivity.class);
+                startActivityForResult(intent, REQUEST_CODE_NOTE);
+
+            }
+        });
+
+        swipeLayout = findViewById(R.id.swipeLayout);
+        swipeLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                notesListAdapter.notifyDataSetChanged();
+                swipeLayout.setRefreshing(false);
+            }
+        });
+
+
         ListView listViewNotes = findViewById(R.id.listViewNotes);
         notesListAdapter = new NotesListAdapter(this);
         listViewNotes.setAdapter(notesListAdapter);
@@ -33,11 +66,47 @@ public class NotesListActivity extends AppCompatActivity {
         listViewNotes.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
-                //TODO реализовать диалоговое окно
-                notesListAdapter.deleteNote(position);
-                return false;
+                positionFoDelete = position;
+                showDeleteDialog();
+                return true;
             }
         });
+
+        listViewNotes.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent = new Intent(NotesListActivity.this, NoteActivity.class);
+                Note curNote = (Note) notesListAdapter.getItem(position);
+                intent.putExtra(KEY_NOTE_ID, curNote.getId());
+                startActivityForResult(intent, REQUEST_CODE_NOTE);
+            }
+        });
+    }
+
+    private void showDeleteDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(NotesListActivity.this);
+        builder.setMessage(R.string.confirmation_deletion);
+        builder.setIcon(R.drawable.ic_delete_black_24dp);
+        builder.setTitle(R.string.attention);
+
+        builder.setPositiveButton(R.string.delete, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                notesListAdapter.deleteNote(positionFoDelete);
+                Toast.makeText(NotesListActivity.this,
+                        R.string.note_deleted_successfully, Toast.LENGTH_SHORT).show();
+            }
+        });
+        builder.setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+            }
+        });
+
+        AlertDialog alertDialog = builder.create();
+
+        alertDialog.show();
     }
 
     @Override
@@ -55,5 +124,19 @@ public class NotesListActivity extends AppCompatActivity {
         }
 
         return false;
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == REQUEST_CODE_NOTE && data != null && resultCode == RESULT_OK) {
+            if (data.getBooleanExtra(KEY_IS_NOTE_SAVE, false)) {
+                notesListAdapter.notifyDataSetChanged();
+                Toast.makeText(NotesListActivity.this, getString(R.string.note_saved_successfully),
+                        Toast.LENGTH_SHORT).show();
+            }
+        }
+
     }
 }

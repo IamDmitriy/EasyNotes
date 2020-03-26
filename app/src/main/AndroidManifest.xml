@@ -10,7 +10,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".notes.NotesListActivity"></activity>
+        <activity
+            android:name=".notes.NoteActivity"
+            android:label="@string/new_note"/>
+        <activity android:name=".notes.NotesListActivity"
+            android:label="@string/my_notes"/>
         <activity android:name=".pin.PinCodeActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

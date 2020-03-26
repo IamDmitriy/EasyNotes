@@ -55,6 +55,7 @@ public class MemoryNoteRepository implements NoteRepository {
 
     @Override
     public void saveNote(Note note) {
+        note.setId(MAX_ID++);
         notes.add(note);
     }
 

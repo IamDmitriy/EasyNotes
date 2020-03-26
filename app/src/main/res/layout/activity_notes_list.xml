@@ -4,20 +4,26 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".NotesListActivity">
+    tools:context=".notes.NotesListActivity">
 
-    <ListView
-        android:id="@+id/listViewNotes"
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/swipeLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@null"
-        android:divider="@null"
-        android:dividerHeight="8dp"
-        tools:listitem="@layout/notes_list_item"
-        android:padding="8dp"
-        android:clipToPadding="false"
-        android:scrollbars="none"
-        />
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <ListView
+            android:id="@+id/listViewNotes"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@null"
+            android:clipToPadding="false"
+            android:divider="@null"
+            android:dividerHeight="8dp"
+            android:padding="8dp"
+            android:scrollbars="none"
+            tools:listitem="@layout/notes_list_item" />
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab"
