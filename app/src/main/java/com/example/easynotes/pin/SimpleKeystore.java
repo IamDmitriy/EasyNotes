@@ -1,7 +1,8 @@
-package com.example.easynotes;
+package com.example.easynotes.pin;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+
 
 public class SimpleKeystore implements Keystore {
     private static final String SHARED_PREF_NAME = "sharedPref";
@@ -9,7 +10,7 @@ public class SimpleKeystore implements Keystore {
 
     private SharedPreferences sharedPref;
 
-    SimpleKeystore(Context context) {
+    public SimpleKeystore(Context context) {
         sharedPref = context.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE);
     }
 

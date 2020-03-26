@@ -1,5 +1,6 @@
-package com.example.easynotes;
+package com.example.easynotes.pin;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -7,6 +8,10 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.easynotes.App;
+import com.example.easynotes.R;
+import com.example.easynotes.notes.NotesListActivity;
 
 import java.util.ArrayList;
 
@@ -54,8 +59,9 @@ public class PinCodeActivity extends AppCompatActivity {
             keystore.saveNewPin("0000"); //Для тестирования
 
             if (keystore.checkPin(curPin)) {
-                //startActivity
-                Log.d(LOG_TAG, "Переходим на главный экран с заметками");
+                Intent intent = new Intent(PinCodeActivity.this,
+                        NotesListActivity.class);
+                startActivity(intent);
             } else {
                 errorOutput = findViewById(R.id.errorOutput);
                 errorOutput.setText(R.string.invalid_pin_code);
