@@ -10,7 +10,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".PinCodeActivity">
+        <activity android:name=".notes.NotesListActivity"></activity>
+        <activity android:name=".pin.PinCodeActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

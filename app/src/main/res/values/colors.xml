@@ -6,4 +6,6 @@
 
     <color name="placeholderBackgroundEmpty">#C5CAE9</color>
     <color name="placeholderBackgroundFilled">#FFBF00</color>
+    
+    <color name="colorOverdueDeadline">#C51162</color>
 </resources>
