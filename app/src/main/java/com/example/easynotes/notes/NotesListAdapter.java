@@ -30,7 +30,13 @@ public class NotesListAdapter extends BaseAdapter {
         this.context = context;
 
         notes = App.getNoteRepository().getNotes();
+
         inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+    }
+
+    void deleteNote(int position) {
+        notes.remove(position);
+        notifyDataSetChanged();
     }
 
     @Override
@@ -40,7 +46,12 @@ public class NotesListAdapter extends BaseAdapter {
 
     @Override
     public Object getItem(int position) {
-        return notes.get(position);
+        if (position < notes.size()) {
+            return notes.get(position);
+        } else {
+            return null;
+        }
+
     }
 
     @Override
@@ -78,12 +89,13 @@ public class NotesListAdapter extends BaseAdapter {
 
             if (deadlineDate.compareTo(new Date()) < 0) {
                 CardView cardView = view.findViewById(R.id.cardView);
-                cardView.setCardBackgroundColor(context.getResources().getColor(R.color.colorOverdueDeadline));
+                cardView.setCardBackgroundColor(context.getResources().
+                        getColor(R.color.colorOverdueDeadline));
 
             }
 
             DateFormat dateFormat = new SimpleDateFormat(DATE_FORMAT);
-            String deadlineOutput = dateFormat.format(new Date(note.getDeadline()));
+            String deadlineOutput = dateFormat.format(deadlineDate);
             deadline.setText(deadlineOutput);
 
 

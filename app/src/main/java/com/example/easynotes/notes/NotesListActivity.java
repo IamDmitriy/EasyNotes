@@ -4,6 +4,8 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
 import androidx.annotation.NonNull;
@@ -13,6 +15,7 @@ import com.example.easynotes.R;
 
 public class NotesListActivity extends AppCompatActivity {
     private static final String LOG_TAG = "ListNotesActivityTag";
+    private NotesListAdapter notesListAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,8 +27,17 @@ public class NotesListActivity extends AppCompatActivity {
 
     private void main() {
         ListView listViewNotes = findViewById(R.id.listViewNotes);
-        NotesListAdapter notesListAdapter = new NotesListAdapter(this);
+        notesListAdapter = new NotesListAdapter(this);
         listViewNotes.setAdapter(notesListAdapter);
+
+        listViewNotes.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+                //TODO реализовать диалоговое окно
+                notesListAdapter.deleteNote(position);
+                return false;
+            }
+        });
     }
 
     @Override
