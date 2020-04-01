@@ -14,6 +14,7 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.TimePicker;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -48,9 +49,7 @@ public class NoteActivity extends AppCompatActivity {
                     dateAndTime.set(Calendar.MONTH, monthOfYear);
                     dateAndTime.set(Calendar.DAY_OF_MONTH, dayOfMonth);
 
-                    DateFormat dateFormat = new SimpleDateFormat(DATE_FORMAT);
-                    String deadlineTime = dateFormat.format(dateAndTime.getTime());
-                    txtDate.setText(deadlineTime);
+                    setOutputDateTime(dateAndTime);
                 }
             };
 
@@ -61,12 +60,11 @@ public class NoteActivity extends AppCompatActivity {
                     dateAndTime.set(Calendar.HOUR_OF_DAY, hourOfDay);
                     dateAndTime.set(Calendar.MINUTE, minute);
 
-                    DateFormat timeFormat = new SimpleDateFormat(TIME_FORMAT);
-                    String deadlineTime = timeFormat.format(dateAndTime.getTime());
-                    txtTime.setText(deadlineTime);
+                    setOutputDateTime(dateAndTime);
 
                 }
             };
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -99,7 +97,8 @@ public class NoteActivity extends AppCompatActivity {
                 } else {
                     saveEditedNote();
                 }
-
+                Toast.makeText(NoteActivity.this, getString(R.string.note_saved_successfully),
+                        Toast.LENGTH_SHORT).show();
                 return true;
         }
 
@@ -123,6 +122,10 @@ public class NoteActivity extends AppCompatActivity {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 setEnabledInputDateTime(isChecked);
+
+                if (isChecked) {
+                    setOutputDateTime(dateAndTime);
+                }
             }
         });
 
@@ -147,13 +150,7 @@ public class NoteActivity extends AppCompatActivity {
         if (hasDeadline) {
             dateAndTime.setTimeInMillis(noteForEdit.getDeadline());
 
-            DateFormat timeFormat = new SimpleDateFormat(TIME_FORMAT);
-            String deadlineTime = timeFormat.format(dateAndTime.getTime());
-            txtTime.setText(deadlineTime);
-
-            DateFormat dateFormat = new SimpleDateFormat(DATE_FORMAT);
-            String deadlineDate = dateFormat.format(dateAndTime.getTime());
-            txtDate.setText(deadlineDate);
+            setOutputDateTime(dateAndTime);
         }
 
 
@@ -164,8 +161,16 @@ public class NoteActivity extends AppCompatActivity {
         txtTime.setEnabled(enabled);
         btnSetDate.setEnabled(enabled);
         btnSetTime.setEnabled(enabled);
+    }
 
+    private void setOutputDateTime(Calendar dateAndTime) {
+        DateFormat timeFormat = new SimpleDateFormat(TIME_FORMAT);
+        String deadlineTime = timeFormat.format(dateAndTime.getTime());
+        txtTime.setText(deadlineTime);
 
+        DateFormat dateFormat = new SimpleDateFormat(DATE_FORMAT);
+        String deadlineDate = dateFormat.format(dateAndTime.getTime());
+        txtDate.setText(deadlineDate);
     }
 
     public void setDate(View v) {
@@ -222,5 +227,21 @@ public class NoteActivity extends AppCompatActivity {
 
         finish();
 
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (noteForEdit == null) {
+            saveNewNote();
+        } else {
+            saveEditedNote();
+        }
+
+        Intent intent = new Intent();
+        intent.putExtra(KEY_IS_NOTE_SAVE, true);
+
+        setResult(RESULT_OK, intent);
+
+        finish();
     }
 }

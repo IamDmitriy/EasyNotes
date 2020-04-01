@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="8dp"
+    tools:context=".SettingsActivity">
+
+    <TextView
+        android:id="@+id/txtEnterNewPin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/enter_new_pin"
+        android:textSize="24sp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+
+        <EditText
+            android:id="@+id/edtEnterNewPin"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:ems="10"
+            android:inputType="numberPassword"
+            android:maxLength="4" />
+
+        <ImageButton
+            android:id="@+id/btnVisibility"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:contentDescription="@string/visibility"
+            app:srcCompat="@drawable/ic_visibility_black_24dp" />
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btnDeletePin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Удалить ПИН-код"
+        android:visibility="gone" />
+
+    <Button
+        android:id="@+id/btnChangePin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/save" />
+
+</LinearLayout>

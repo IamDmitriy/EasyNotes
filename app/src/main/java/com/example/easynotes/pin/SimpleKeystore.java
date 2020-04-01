@@ -6,22 +6,24 @@ import android.content.SharedPreferences;
 
 public class SimpleKeystore implements Keystore {
     private static final String SHARED_PREF_NAME = "sharedPref";
-    private static final String PIN_CODE_KEY = "pinCodeKey";
+    private static final String KEY_PIN_CODE = "pinCode";
 
     private SharedPreferences sharedPref;
 
     public SimpleKeystore(Context context) {
         sharedPref = context.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE);
+
+        //TODO saveNewPin("0000"); //Для тестирования
     }
 
     @Override
     public boolean hasPin() {
-        return (sharedPref.getString(PIN_CODE_KEY, null) != null);
+        return (sharedPref.getString(KEY_PIN_CODE, null) != null);
     }
 
     @Override
     public boolean checkPin(String pin) {
-        if (hasPin()) return sharedPref.getString(PIN_CODE_KEY, null).equals(pin);
+        if (hasPin()) return sharedPref.getString(KEY_PIN_CODE, null).equals(pin);
 
         return false;
     }
@@ -30,7 +32,7 @@ public class SimpleKeystore implements Keystore {
     public void saveNewPin(String pin) {
         sharedPref
                 .edit()
-                .putString(PIN_CODE_KEY, pin)
+                .putString(KEY_PIN_CODE, pin)
                 .apply();
     }
 }

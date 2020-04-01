@@ -3,7 +3,6 @@ package com.example.easynotes.notes;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -18,6 +17,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.example.easynotes.R;
+import com.example.easynotes.SettingsActivity;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 public class NotesListActivity extends AppCompatActivity {
@@ -119,7 +119,7 @@ public class NotesListActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_settings:
-                Log.d(LOG_TAG, "Выбран пункт меню Настройки");
+                startActivity(new Intent(NotesListActivity.this, SettingsActivity.class));
                 return true;
         }
 
@@ -133,8 +133,6 @@ public class NotesListActivity extends AppCompatActivity {
         if (requestCode == REQUEST_CODE_NOTE && data != null && resultCode == RESULT_OK) {
             if (data.getBooleanExtra(KEY_IS_NOTE_SAVE, false)) {
                 notesListAdapter.notifyDataSetChanged();
-                Toast.makeText(NotesListActivity.this, getString(R.string.note_saved_successfully),
-                        Toast.LENGTH_SHORT).show();
             }
         }
 

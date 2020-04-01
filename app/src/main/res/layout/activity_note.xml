@@ -15,7 +15,7 @@
         android:layout_height="wrap_content"
         android:ems="10"
         android:hint="@string/title"
-        android:inputType="textCapWords" />
+        android:inputType="textCapSentences" />
 
     <EditText
         android:id="@+id/edtBody"
@@ -26,7 +26,7 @@
         android:ems="10"
         android:gravity="top|start"
         android:hint="@string/note_body"
-        android:inputType="textMultiLine|textCapWords" />
+        android:inputType="textMultiLine|textCapSentences" />
 
     <CheckBox
         android:id="@+id/chbHasDeadline"
