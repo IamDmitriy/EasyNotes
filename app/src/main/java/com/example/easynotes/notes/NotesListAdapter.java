@@ -15,48 +15,47 @@ import com.example.easynotes.R;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.List;
 
 public class NotesListAdapter extends BaseAdapter {
     private static final String DATE_FORMAT = "dd.MM.yyyy HH:mm";
 
-    private List<Note> notes;
-
     private LayoutInflater inflater;
-
     private Context context;
+    private NoteRepository noteRepository;
+
 
     NotesListAdapter(Context context) {
         this.context = context;
 
-        notes = App.getNoteRepository().getNotes();
+        noteRepository = App.getNoteRepository();
 
         inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+
+        noteRepository.setOnDataChangedListener(new NoteRepository.onDataChangedListener() {
+            @Override
+            public void onDataChanged() {
+                notifyDataSetChanged();
+            }
+        });
     }
 
     void deleteNote(int position) {
-        notes.remove(position);
-        notifyDataSetChanged();
+        noteRepository.deleteById(noteRepository.getNoteByPos(position).getId());
     }
 
     @Override
     public int getCount() {
-        return notes.size();
+        return noteRepository.size();
     }
 
     @Override
     public Object getItem(int position) {
-        if (position < notes.size()) {
-            return notes.get(position);
-        } else {
-            return null;
-        }
-
+        return noteRepository.getNoteByPos(position);
     }
 
     @Override
     public long getItemId(int position) {
-        return notes.get(position).getId();
+        return noteRepository.getNoteIdByPos(position);
     }
 
     @Override
@@ -66,7 +65,7 @@ public class NotesListAdapter extends BaseAdapter {
             view = inflater.inflate(R.layout.notes_list_item, parent, false);
         }
 
-        Note note = notes.get(position);
+        Note note = noteRepository.getNoteByPos(position);
 
         TextView txtTitle = view.findViewById(R.id.title);
         TextView txtBody = view.findViewById(R.id.body);
@@ -118,4 +117,5 @@ public class NotesListAdapter extends BaseAdapter {
         cardView.setCardBackgroundColor(context.getResources().
                 getColor(colorCardBackground));
     }
+
 }

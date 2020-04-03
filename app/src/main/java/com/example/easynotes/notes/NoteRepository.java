@@ -3,11 +3,24 @@ package com.example.easynotes.notes;
 import java.util.List;
 
 public interface NoteRepository {
-    Note getNoteById(String id);
-
     List<Note> getNotes();
+
+    int size();
+
+    Note getNoteByPos(int position);
+
+    long getNoteIdByPos(int position);
+
+    Note getNoteById(long id);
 
     void saveNote(Note note);
 
-    void deleteById(String id);
+    void setOnDataChangedListener(onDataChangedListener onDataChangedListener);
+
+    void deleteById(long id);
+
+    interface onDataChangedListener {
+        void onDataChanged();
+    }
+
 }

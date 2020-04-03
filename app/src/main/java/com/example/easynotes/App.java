@@ -2,10 +2,10 @@ package com.example.easynotes;
 
 import android.app.Application;
 
-import com.example.easynotes.notes.MemoryNoteRepository;
+import com.example.easynotes.notes.DatabaseNoteRepository;
 import com.example.easynotes.notes.NoteRepository;
+import com.example.easynotes.pin.HashedKeystore;
 import com.example.easynotes.pin.Keystore;
-import com.example.easynotes.pin.SimpleKeystore;
 
 public class App extends Application {
     private static NoteRepository noteRepository;
@@ -22,7 +22,7 @@ public class App extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-        noteRepository = new MemoryNoteRepository();
-        keystore = new SimpleKeystore(this);
+        noteRepository = new DatabaseNoteRepository(getApplicationContext());
+        keystore = new HashedKeystore(this);
     }
 }

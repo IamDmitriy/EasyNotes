@@ -25,6 +25,7 @@ import com.example.easynotes.R;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 
 public class NoteActivity extends AppCompatActivity {
     private static final String DATE_FORMAT = "dd.MM.yyyy";
@@ -64,6 +65,7 @@ public class NoteActivity extends AppCompatActivity {
 
                 }
             };
+    private NoteRepository noteRepository;
 
 
     @Override
@@ -71,10 +73,12 @@ public class NoteActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_note);
 
-        int noteId = getIntent().getIntExtra(KEY_NOTE_ID, -1);
+        noteRepository = App.getNoteRepository();
+
+        long noteId = getIntent().getLongExtra(KEY_NOTE_ID, -1);
 
         if (noteId != -1) {
-            noteForEdit = App.getNoteRepository().getNoteById(String.valueOf(noteId));
+            noteForEdit = noteRepository.getNoteById(noteId);
         } else {
             noteForEdit = null;
         }
@@ -201,6 +205,10 @@ public class NoteActivity extends AppCompatActivity {
             noteForEdit.setDeadline(dateAndTime.getTimeInMillis());
         }
 
+        noteForEdit.setLastChanges(new Date().getTime());
+
+        noteRepository.saveNote(noteForEdit);
+
         Intent intent = new Intent();
         intent.putExtra(KEY_IS_NOTE_SAVE, true);
 
@@ -215,9 +223,9 @@ public class NoteActivity extends AppCompatActivity {
         boolean hasDeadline = chbHasDeadline.isChecked();
 
         if (hasDeadline) {
-            App.getNoteRepository().saveNote(new Note(title, body, dateAndTime.getTimeInMillis()));
+            noteRepository.saveNote(new Note(title, body, dateAndTime.getTimeInMillis()));
         } else {
-            App.getNoteRepository().saveNote(new Note(title, body));
+            noteRepository.saveNote(new Note(title, body));
         }
 
         Intent intent = new Intent();

@@ -21,14 +21,12 @@ import com.example.easynotes.SettingsActivity;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 public class NotesListActivity extends AppCompatActivity {
-    private static final String LOG_TAG = "ListNotesActivityTag";
     private static final int REQUEST_CODE_NOTE = 1;
     private static final String KEY_IS_NOTE_SAVE = "isNoteSaved";
     private static final String KEY_NOTE_ID = "noteId";
 
     private NotesListAdapter notesListAdapter;
     private SwipeRefreshLayout swipeLayout;
-    private int positionFoDelete;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,14 +58,13 @@ public class NotesListActivity extends AppCompatActivity {
 
 
         ListView listViewNotes = findViewById(R.id.listViewNotes);
-        notesListAdapter = new NotesListAdapter(this);
+        notesListAdapter = new NotesListAdapter(NotesListActivity.this);
         listViewNotes.setAdapter(notesListAdapter);
 
         listViewNotes.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
-                positionFoDelete = position;
-                showDeleteDialog();
+                showDeleteDialog(position);
                 return true;
             }
         });
@@ -83,7 +80,7 @@ public class NotesListActivity extends AppCompatActivity {
         });
     }
 
-    private void showDeleteDialog() {
+    private void showDeleteDialog(final int positionForDelete) {
         AlertDialog.Builder builder = new AlertDialog.Builder(NotesListActivity.this);
         builder.setMessage(R.string.confirmation_deletion);
         builder.setIcon(R.drawable.ic_delete_black_24dp);
@@ -92,7 +89,7 @@ public class NotesListActivity extends AppCompatActivity {
         builder.setPositiveButton(R.string.delete, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                notesListAdapter.deleteNote(positionFoDelete);
+                notesListAdapter.deleteNote(positionForDelete);
                 Toast.makeText(NotesListActivity.this,
                         R.string.note_deleted_successfully, Toast.LENGTH_SHORT).show();
             }
@@ -133,6 +130,9 @@ public class NotesListActivity extends AppCompatActivity {
         if (requestCode == REQUEST_CODE_NOTE && data != null && resultCode == RESULT_OK) {
             if (data.getBooleanExtra(KEY_IS_NOTE_SAVE, false)) {
                 notesListAdapter.notifyDataSetChanged();
+                //TODO По сути необходимоти т.к.адптер сам будет обновляться , если я реализую метод
+                // озавершении операции
+
             }
         }
 

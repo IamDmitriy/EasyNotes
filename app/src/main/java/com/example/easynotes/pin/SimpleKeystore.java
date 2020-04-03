@@ -12,8 +12,6 @@ public class SimpleKeystore implements Keystore {
 
     public SimpleKeystore(Context context) {
         sharedPref = context.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE);
-
-        //TODO saveNewPin("0000"); //Для тестирования
     }
 
     @Override
@@ -29,10 +27,11 @@ public class SimpleKeystore implements Keystore {
     }
 
     @Override
-    public void saveNewPin(String pin) {
+    public boolean saveNewPin(String pin) {
         sharedPref
                 .edit()
                 .putString(KEY_PIN_CODE, pin)
                 .apply();
+        return true;
     }
 }

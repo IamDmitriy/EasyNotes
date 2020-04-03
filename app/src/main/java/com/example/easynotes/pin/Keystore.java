@@ -5,5 +5,5 @@ public interface Keystore {
 
     boolean checkPin(String pin);
 
-    void saveNewPin(String pin);
+    boolean saveNewPin(String pin);
 }

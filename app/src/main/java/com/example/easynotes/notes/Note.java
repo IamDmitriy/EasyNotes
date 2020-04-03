@@ -1,42 +1,61 @@
 package com.example.easynotes.notes;
 
+import androidx.room.Entity;
+import androidx.room.Ignore;
+import androidx.room.PrimaryKey;
+
+import java.util.Date;
+
+@Entity
 public class Note {
-    private int id;
+
+    @PrimaryKey(autoGenerate = true)
+    private long id;
     private String title;
     private String body;
     private boolean hasDeadline;
     private long deadline;
+    private long lastChanges;
 
+    @Ignore
     public Note(String title, String body) {
         this.title = title;
         this.body = body;
         hasDeadline = false;
+        lastChanges = new Date().getTime();
     }
 
+    @Ignore
     public Note(String title, String body, long deadline) {
         this.title = title;
         this.body = body;
         hasDeadline = true;
         this.deadline = deadline;
+        lastChanges = new Date().getTime();
     }
 
-    public Note(int id, String title, String body, boolean hasDeadline, long deadline) {
+    public Note(long id, String title, String body, boolean hasDeadline, long deadline, long lastChanges) {
         this.id = id;
         this.title = title;
         this.body = body;
         this.hasDeadline = hasDeadline;
-
-        if (hasDeadline) {
-            this.deadline = deadline;
-        }
-
+        this.deadline = deadline;
+        this.lastChanges = lastChanges;
     }
 
-    public int getId() {
+    public long getLastChanges() {
+        return lastChanges;
+    }
+
+    public void setLastChanges(long lastChanges) {
+        this.lastChanges = lastChanges;
+    }
+
+    public long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 
@@ -60,6 +79,10 @@ public class Note {
         return hasDeadline;
     }
 
+    public void setHasDeadline(boolean hasDeadline) {
+        this.hasDeadline = hasDeadline;
+    }
+
     public long getDeadline() {
         return deadline;
     }
@@ -68,7 +91,5 @@ public class Note {
         this.deadline = deadline;
     }
 
-    public void setHasDeadline(boolean hasDeadline) {
-        this.hasDeadline = hasDeadline;
-    }
+
 }
