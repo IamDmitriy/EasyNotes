@@ -17,7 +17,7 @@
     <string name="settings">Настройки</string>
     <string name="title">Заголовок</string>
     <string name="note_body">Текст заметки</string>
-    <string name="deadline">Дедлайн</string>
+    <string name="deadline">Напоминание</string>
     <string name="new_note">Новая заметка</string>
     <string name="save_note">Сохранить заметку</string>
     <string name="save">Сохранить</string>
@@ -31,7 +31,7 @@
     <string name="pin_code_must_contain_4_digits">ПИН-код должен содержать 4 цифры!</string>
     <string name="new_pin_successfully_saved">Новый ПИН-код успешно сохранён!</string>
     <string name="visibility">Видимость</string>
-    <string name="welcome_message">"Добро пожаловать в Easy Note! Вы можете установить ПИН-код для
+    <string name="welcome_message">"Добро пожаловать в Easy Notes! Вы можете установить ПИН-код для
         безопасности Ваших заметок!"</string>
     <string name="pin_code_successfully_deleted">ПИН-код успешно удалён!</string>
 

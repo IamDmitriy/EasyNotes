@@ -5,21 +5,26 @@
     <application
         android:name=".App"
         android:allowBackup="true"
-        android:icon="@drawable/ic_app"
+        android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
-        android:roundIcon="@drawable/ic_app"
+        android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
             android:name=".SettingsActivity"
-            android:label="@string/settings" />
+            android:label="@string/settings"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".notes.NoteActivity"
-            android:label="@string/new_note" />
+            android:label="@string/new_note"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".notes.NotesListActivity"
-            android:label="@string/my_notes" />
-        <activity android:name=".pin.PinCodeActivity">
+            android:label="@string/my_notes"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".pin.PinCodeActivity"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
