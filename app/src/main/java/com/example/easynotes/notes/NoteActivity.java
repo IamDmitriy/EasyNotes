@@ -18,14 +18,20 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.work.Data;
+import androidx.work.OneTimeWorkRequest;
+import androidx.work.WorkManager;
 
 import com.example.easynotes.App;
+import com.example.easynotes.notification.DeadlineWorker;
 import com.example.easynotes.R;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.UUID;
+import java.util.concurrent.TimeUnit;
 
 public class NoteActivity extends AppCompatActivity {
     private static final String DATE_FORMAT = "dd.MM.yyyy";
@@ -207,7 +213,30 @@ public class NoteActivity extends AppCompatActivity {
 
         noteForEdit.setLastChanges(new Date().getTime());
 
-        noteRepository.saveNote(noteForEdit);
+
+        finishSaveNote(noteForEdit);
+    }
+
+    private void saveNewNote() {
+        Note newNote;
+
+        String title = edtTitle.getText().toString();
+        String body = edtBody.getText().toString();
+        boolean hasDeadline = chbHasDeadline.isChecked();
+
+        if (hasDeadline) {
+            newNote = new Note(title, body, dateAndTime.getTimeInMillis());
+
+        } else {
+            newNote = new Note(title, body);
+        }
+
+        finishSaveNote(newNote); //TODO внимание, тут id пустой
+    }
+
+    private void finishSaveNote(Note noteForSave) {
+        dispatchScheduleReminder(noteForSave); //Хорошо бы через возврат всё сделать
+        noteRepository.saveNote(noteForSave);
 
         Intent intent = new Intent();
         intent.putExtra(KEY_IS_NOTE_SAVE, true);
@@ -217,24 +246,60 @@ public class NoteActivity extends AppCompatActivity {
         finish();
     }
 
-    private void saveNewNote() {
-        String title = edtTitle.getText().toString();
-        String body = edtBody.getText().toString();
-        boolean hasDeadline = chbHasDeadline.isChecked();
-
-        if (hasDeadline) {
-            noteRepository.saveNote(new Note(title, body, dateAndTime.getTimeInMillis()));
-        } else {
-            noteRepository.saveNote(new Note(title, body));
+    private void dispatchScheduleReminder(Note note) {
+        if (note.hasWorkId() && !note.hasDeadline()) { //существующее напоминание удалили
+            cancelScheduleReminder(note);
+            return;
         }
 
-        Intent intent = new Intent();
-        intent.putExtra(KEY_IS_NOTE_SAVE, true);
+        if (note.hasWorkId() && note.hasDeadline()) { //существующее напоминание изменили
+            updateScheduleReminder(note);
+            return;
+        }
 
-        setResult(RESULT_OK, intent);
+        if (!note.hasWorkId() && note.hasDeadline()) { // создают новое напоминание
+            createScheduleReminder(note);
+            return;
+        }
 
-        finish();
+        if (!note.hasWorkId() && !note.hasDeadline()) { // напоминание не установлено
+            return;
+        }
 
+    }
+
+    private void cancelScheduleReminder(Note note) {
+        note.setHasWorkId(false);
+        WorkManager.getInstance().cancelWorkById(UUID.fromString(note.getWorkId()));
+    }
+
+    private void updateScheduleReminder(Note note) {
+        cancelScheduleReminder(note);
+        createScheduleReminder(note);
+    }
+
+    private void createScheduleReminder(Note note) {
+        long delay = note.getDeadline() - System.currentTimeMillis();
+        if (delay < 0) {
+            note.setHasWorkId(false);
+            return;
+        } // Напоминание установлено в прошлом - задача не треубется
+
+        Data data = new Data.Builder()
+                .putLong(DeadlineWorker.NOTE_ID_KEY, note.getId())
+                .putString(DeadlineWorker.CONTENT_TITLE_KEY, note.getTitle())
+                .putString(DeadlineWorker.CONTENT_TEXT_KEY, note.getBody())
+                .build();
+
+        OneTimeWorkRequest scheduleReminderRequest = new OneTimeWorkRequest.Builder(DeadlineWorker.class)
+                .setInitialDelay(delay, TimeUnit.MILLISECONDS)
+                .setInputData(data)
+                .build();
+
+        WorkManager.getInstance().enqueue(scheduleReminderRequest);
+
+        note.setHasWorkId(true);
+        note.setWorkId(scheduleReminderRequest.getId().toString());
     }
 
     @Override

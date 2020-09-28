@@ -15,6 +15,8 @@ public class Note {
     private String body;
     private boolean hasDeadline;
     private long deadline;
+    private boolean hasWorkId;
+    private String workId;
     private long lastChanges;
 
     @Ignore
@@ -34,12 +36,21 @@ public class Note {
         lastChanges = new Date().getTime();
     }
 
-    public Note(long id, String title, String body, boolean hasDeadline, long deadline, long lastChanges) {
+    public Note(long id,
+                String title,
+                String body,
+                boolean hasDeadline,
+                long deadline,
+                boolean hasWorkId,
+                String workId,
+                long lastChanges) {
         this.id = id;
         this.title = title;
         this.body = body;
         this.hasDeadline = hasDeadline;
         this.deadline = deadline;
+        this.hasWorkId = hasWorkId;
+        this.workId = workId;
         this.lastChanges = lastChanges;
     }
 
@@ -91,5 +102,19 @@ public class Note {
         this.deadline = deadline;
     }
 
+    public String getWorkId() {
+        return workId;
+    }
 
+    public void setWorkId(String workId) {
+        this.workId = workId;
+    }
+
+    public boolean hasWorkId() {
+        return hasWorkId;
+    }
+
+    public void setHasWorkId(boolean hasWorkId) {
+        this.hasWorkId = hasWorkId;
+    }
 }
