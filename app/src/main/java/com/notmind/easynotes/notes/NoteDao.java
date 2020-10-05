@@ -1,4 +1,4 @@
-package com.example.easynotes.notes;
+package com.notmind.easynotes.notes;
 
 import androidx.room.Dao;
 import androidx.room.Insert;

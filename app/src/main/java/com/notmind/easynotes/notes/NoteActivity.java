@@ -1,4 +1,4 @@
-package com.example.easynotes.notes;
+package com.notmind.easynotes.notes;
 
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
@@ -22,9 +22,9 @@ import androidx.work.Data;
 import androidx.work.OneTimeWorkRequest;
 import androidx.work.WorkManager;
 
-import com.example.easynotes.App;
-import com.example.easynotes.notification.DeadlineWorker;
-import com.example.easynotes.R;
+import com.notmind.easynotes.App;
+import com.notmind.easynotes.notification.DeadlineWorker;
+import com.notmind.easynotes.R;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;

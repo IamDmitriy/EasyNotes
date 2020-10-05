@@ -1,4 +1,4 @@
-package com.example.easynotes.notes;
+package com.notmind.easynotes.notes;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -9,8 +9,8 @@ import android.widget.TextView;
 
 import androidx.cardview.widget.CardView;
 
-import com.example.easynotes.App;
-import com.example.easynotes.R;
+import com.notmind.easynotes.App;
+import com.notmind.easynotes.R;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;

@@ -1,4 +1,4 @@
-package com.example.easynotes.pin;
+package com.notmind.easynotes.pin;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -11,10 +11,10 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.easynotes.App;
-import com.example.easynotes.R;
-import com.example.easynotes.SettingsActivity;
-import com.example.easynotes.notes.NotesListActivity;
+import com.notmind.easynotes.App;
+import com.notmind.easynotes.R;
+import com.notmind.easynotes.SettingsActivity;
+import com.notmind.easynotes.notes.NotesListActivity;
 
 import java.util.ArrayList;
 

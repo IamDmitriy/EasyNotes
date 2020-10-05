@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.easynotes">
+    package="com.notmind.easynotes">
 
     <application
-        android:name=".App"
+        android:name="com.notmind.easynotes.App"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -11,19 +11,19 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".SettingsActivity"
+            android:name="com.notmind.easynotes.SettingsActivity"
             android:label="@string/settings"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".notes.NoteActivity"
+            android:name="com.notmind.easynotes.notes.NoteActivity"
             android:label="@string/new_note"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".notes.NotesListActivity"
+            android:name="com.notmind.easynotes.notes.NotesListActivity"
             android:label="@string/my_notes"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".pin.PinCodeActivity"
+            android:name="com.notmind.easynotes.pin.PinCodeActivity"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

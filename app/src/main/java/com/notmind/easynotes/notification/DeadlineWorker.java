@@ -1,4 +1,4 @@
-package com.example.easynotes.notification;
+package com.notmind.easynotes.notification;
 
 import android.content.Context;
 import android.util.Log;

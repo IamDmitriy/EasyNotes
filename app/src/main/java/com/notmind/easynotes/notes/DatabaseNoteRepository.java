@@ -1,4 +1,4 @@
-package com.example.easynotes.notes;
+package com.notmind.easynotes.notes;
 
 import android.content.Context;
 import android.util.Log;
@@ -10,8 +10,6 @@ import java.util.List;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.functions.Consumer;
-import io.reactivex.observers.DisposableSingleObserver;
-import io.reactivex.schedulers.Schedulers;
 
 public class DatabaseNoteRepository implements NoteRepository {
     private static final String LOG_TAG = "DBNoteRepositoryTag";

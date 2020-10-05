@@ -1,4 +1,4 @@
-package com.example.easynotes.pin;
+package com.notmind.easynotes.pin;
 
 import android.content.Context;
 import android.content.SharedPreferences;

@@ -1,4 +1,4 @@
-package com.example.easynotes;
+package com.notmind.easynotes;
 
 import org.junit.Test;
 

@@ -1,11 +1,11 @@
-package com.example.easynotes;
+package com.notmind.easynotes;
 
 import android.app.Application;
 
-import com.example.easynotes.notes.DatabaseNoteRepository;
-import com.example.easynotes.notes.NoteRepository;
-import com.example.easynotes.pin.HashedKeystore;
-import com.example.easynotes.pin.Keystore;
+import com.notmind.easynotes.notes.DatabaseNoteRepository;
+import com.notmind.easynotes.notes.NoteRepository;
+import com.notmind.easynotes.pin.HashedKeystore;
+import com.notmind.easynotes.pin.Keystore;
 
 public class App extends Application {
     private static NoteRepository noteRepository;

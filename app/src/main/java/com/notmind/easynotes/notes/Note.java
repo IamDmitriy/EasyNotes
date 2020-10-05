@@ -1,4 +1,4 @@
-package com.example.easynotes.notes;
+package com.notmind.easynotes.notes;
 
 import androidx.room.Entity;
 import androidx.room.Ignore;

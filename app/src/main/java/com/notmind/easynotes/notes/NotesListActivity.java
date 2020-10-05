@@ -1,4 +1,4 @@
-package com.example.easynotes.notes;
+package com.notmind.easynotes.notes;
 
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -16,8 +16,8 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
-import com.example.easynotes.R;
-import com.example.easynotes.SettingsActivity;
+import com.notmind.easynotes.R;
+import com.notmind.easynotes.SettingsActivity;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 public class NotesListActivity extends AppCompatActivity {

@@ -1,4 +1,4 @@
-package com.example.easynotes.notification;
+package com.notmind.easynotes.notification;
 
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
@@ -10,8 +10,8 @@ import android.os.Build;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
 
-import com.example.easynotes.R;
-import com.example.easynotes.pin.PinCodeActivity;
+import com.notmind.easynotes.R;
+import com.notmind.easynotes.pin.PinCodeActivity;
 
 import java.util.Random;
 

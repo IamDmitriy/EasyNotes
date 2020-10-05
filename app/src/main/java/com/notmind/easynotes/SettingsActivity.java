@@ -1,4 +1,4 @@
-package com.example.easynotes;
+package com.notmind.easynotes;
 
 import android.content.SharedPreferences;
 import android.os.Bundle;
